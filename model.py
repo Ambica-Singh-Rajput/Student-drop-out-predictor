@@ -13,42 +13,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 
 print("Starting model training...")
 
-np.random.seed(42)
-
-n = 300
-
-data = pd.DataFrame({
-
-    "attendance": np.random.normal(70,15,n).clip(30,100),
-
-    "study_hours": np.random.normal(4,1.5,n).clip(0,10),
-
-    "previous_grade": np.random.normal(65,15,n).clip(30,100),
-
-    "assignments_completed": np.random.normal(70,20,n).clip(30,100),
-
-    "internet_access": np.random.randint(0,2,n),
-
-    "family_income": np.random.randint(1,4,n),
-
-    "stress_level": np.random.normal(5,2,n).clip(1,10),
-
-    "extracurricular": np.random.randint(0,2,n)
-
-})
-
-# dropout logic
-data["dropout"] = (
-    (data["attendance"] < 55) |
-    (data["study_hours"] < 2) |
-    (data["previous_grade"] < 50) |
-    (data["stress_level"] > 8)
-).astype(int)
-
-print("Dataset created")
-
-# save dataset
-data.to_csv("student_dropout_dataset.csv",index=False)
+data = pd.read_csv("student_dropout_dataset.csv")
 
 X = data.drop("dropout",axis=1)
 
@@ -126,19 +91,6 @@ print(cm)
 print("\nClassification Report")
 
 print(classification_report(y_test,pred))
-
-# confusion matrix graph
-plt.figure()
-
-plt.imshow(cm)
-
-plt.title("Confusion Matrix")
-
-plt.xlabel("Predicted")
-
-plt.ylabel("Actual")
-
-plt.show()
 
 # feature importance
 importance = best_model.feature_importances_
