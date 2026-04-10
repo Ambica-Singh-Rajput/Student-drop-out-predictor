@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>AI Student Dropout Predictor</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Student Dropout Risk Predictor</h1>
+
+<p>Machine Learning based Early Warning System</p>
+
+<form action="/predict" method="post">
+
+<input name="attendance" placeholder="Attendance %" required>
+
+<input name="study_hours" placeholder="Study Hours per day" required>
+
+<input name="previous_grade" placeholder="Previous Grade %" required>
+
+<input name="assignments_completed" placeholder="Assignments %" required>
+
+<input name="internet_access" placeholder="Internet Access (1 yes 0 no)" required>
+
+<input name="family_income" placeholder="Family Income (1 low 2 medium 3 high)" required>
+
+<input name="stress_level" placeholder="Stress Level (1-10)" required>
+
+<input name="extracurricular" placeholder="Extracurricular (1 yes 0 no)" required>
+
+<button type="submit">Predict</button>
+
+</form>
+
+<h2>{{ prediction_text }}</h2>
+
+</div>
+
+</body>
+
+</html>
